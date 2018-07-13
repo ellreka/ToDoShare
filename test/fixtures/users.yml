@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  twitterId: MyString
+  twitter_id: MyString
 
 two:
   name: MyString
-  twitterId: MyString
+  twitter_id: MyString
