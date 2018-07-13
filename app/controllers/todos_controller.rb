@@ -24,6 +24,8 @@ class TodosController < ApplicationController
   end
 
   def mypage
+    # @todos = Todo.find(:twiiter_id).order(created_at: 'desc')
+    @todos = Todo.where(twitter_id: params[:twitter_id])
   end
 
   private
