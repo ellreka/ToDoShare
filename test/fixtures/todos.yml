@@ -3,9 +3,9 @@
 one:
   title: MyString
   body: MyString
-  twitterId: MyString
+  twitter_id: MyString
 
 two:
   title: MyString
   body: MyString
-  twitterId: MyString
+  twitter_id: MyString
