@@ -13,3 +13,9 @@
 </li>
 <% end %>
 </ul>
+
+<%if logged_in?%>
+<a href="/logout">ログアウト</a>
+<%else%>
+<a href="/auth/twitter"><button>ログイン</button></a>
+<%end%>
