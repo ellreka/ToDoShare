@@ -6,6 +6,7 @@
 <% @todos.each do |todo| %>
 <li>
 <%= link_to todo.title, todo_path(todo) %>
+<%= link_to 'いいね', %>
 <%= link_to 'delete', 
     todo_path(todo), 
     method: :delete, 

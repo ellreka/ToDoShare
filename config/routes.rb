@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :todos
   root 'todos#index'
   get '/:twitter_id' => 'todos#mypage'
+  
 
 end

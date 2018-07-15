@@ -11,7 +11,6 @@ class TodosController < ApplicationController
   end
 
   def create
-    # render plain: params[:post].inspect
     @todo = Todo.new(post_params)
     @todo.save
     redirect_to todos_path
