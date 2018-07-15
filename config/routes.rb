@@ -10,11 +10,4 @@ Rails.application.routes.draw do
 
   root 'todos#index'
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 7b8834edfb3a81da7049fc54be695ac0c5d39dc3
->>>>>>> master
 end
