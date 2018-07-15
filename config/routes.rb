@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   resources :todos
   root 'todos#index'
   get '/:twitter_id' => 'todos#mypage'
@@ -9,4 +10,11 @@ Rails.application.routes.draw do
 
   root 'todos#index'
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7b8834edfb3a81da7049fc54be695ac0c5d39dc3
+>>>>>>> master
 end

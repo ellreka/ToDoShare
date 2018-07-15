@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::Base
+<<<<<<< HEAD
   protect_from_forgery with: :exception
+=======
+<<<<<<< HEAD
+    protect_from_forgery with: :exception
+=======
+  protect_from_forgery with: :exception
+>>>>>>> 7b8834edfb3a81da7049fc54be695ac0c5d39dc3
+>>>>>>> master
   helper_method :current_user, :logged_in?
 
   private
