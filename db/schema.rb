@@ -18,20 +18,20 @@ ActiveRecord::Schema.define(version: 2018_07_14_124347) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-    
+
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
     t.string "body"
     t.bigint "twitter_id"
     t.integer "likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-    
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "twitter_id"
     t.string "image_url"
     t.string "provider"
   end
+
 end
