@@ -13,28 +13,24 @@
 ActiveRecord::Schema.define(version: 2018_07_14_124347) do
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "todo_id"
-    t.bigint "user_id"
+    t.integer "todo_id"
+    t.bigint "twitter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["todo_id"], name: "index_likes_on_todo_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
   end
-
+    
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "body"
-    t.string "twitter_id"
+    t.bigint "twitter_id"
+    t.integer "likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+    
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.string "twitter_id"
+    t.bigint "twitter_id"
     t.string "image_url"
     t.string "provider"
   end
-
-  add_foreign_key "likes", "todos"
-  add_foreign_key "likes", "users"
 end
