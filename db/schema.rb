@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_124347) do
   end
     
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
     t.string "body"
     t.bigint "twitter_id"
     t.integer "likes"
