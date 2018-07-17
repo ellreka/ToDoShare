@@ -11,8 +11,11 @@ class TodosController < ApplicationController
   end
 
   def create
-    # render plain: params[:post].inspect
-    @todo = Todo.new(post_params)
+    @todo = Todo.new(
+    body: params[:post][:body],
+    twitter_id: session[:user_id],
+    likes: 0
+    )
     @todo.save
     redirect_to todos_path
   end
