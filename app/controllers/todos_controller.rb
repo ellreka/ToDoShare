@@ -11,12 +11,15 @@ class TodosController < ApplicationController
   end
 
   def create
-    @todo = Todo.new(
+    @todo = current_user.todos.create(
       body: params[:post][:body],
-      twitter_id: current_user.id,
-      # likes: 0
+      twitter_id: current_user.twitter_id
     )
-    @todo.save
+    # @todo = Todo.new(
+    #   body: params[:post][:body],
+    #   twitter_id: User.find(current_user.id).twitter_id
+    # )
+    # @todo.save
     redirect_to todos_path
   end
 
@@ -30,9 +33,4 @@ class TodosController < ApplicationController
     # @todos = Todo.find(:twiiter_id).order(created_at: 'desc')
     @todos = Todo.where(twitter_id: params[:twitter_id])
   end
-
-  private
-    def post_params
-      params.require(:post).permit(:title, :body)
-    end
 end
