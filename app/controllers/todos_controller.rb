@@ -12,9 +12,9 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(
-    body: params[:post][:body],
-    twitter_id: session[:user_id],
-    likes: 0
+      body: params[:post][:body],
+      twitter_id: current_user.id,
+      # likes: 0
     )
     @todo.save
     redirect_to todos_path

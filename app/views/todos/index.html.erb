@@ -10,7 +10,7 @@ Todos
   <%= link_to 'いいね',
   todo_likes_path(todo), 
   method: :post %>
-  <%= "いいねの数: #{todo.likes}" %>
+  <%= "いいねの数: #{todo.likes.length}" %>
   <%= link_to 'delete', 
   todo_path(todo), method: :delete, 
   data: { confirm: 'Sure?' } %>
