@@ -5,7 +5,7 @@
 <ul>
 <% @todos.each do |todo| %>
 <li>
-<%= link_to todo.title, todo_path(todo) %>
+<%= link_to todo.body, todo_path(todo) %>
 <%= link_to 'delete', 
     todo_path(todo), 
     method: :delete, 

@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(version: 2018_07_14_124347) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.bigint "twitter_id"
+    t.string "twitter_id"
     t.string "image_url"
     t.string "provider"
+    t.string "access_token"
+    t.string "access_token_secret"
   end
 
 end

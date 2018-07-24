@@ -15,12 +15,16 @@ class TodosController < ApplicationController
       body: params[:post][:body],
       twitter_id: current_user.twitter_id
     )
-    # @todo = Todo.new(
-    #   body: params[:post][:body],
-    #   twitter_id: User.find(current_user.id).twitter_id
-    # )
-    # @todo.save
-    redirect_to todos_path
+
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = ENV['TWITTER_API_KEY']
+      config.consumer_secret = ENV['TWITTER_SECRET_KEY']
+      config.access_token = current_user.access_token
+      config.access_token_secret = current_user.access_token_secret
+    end
+
+    client.update(@todo.body)
+    redirect_to root_path
   end
 
   def destroy
