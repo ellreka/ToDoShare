@@ -1,2 +1,10 @@
 <%= link_to 'いいね',todo_likes_path(todo), method: :post %>
-<% if todo.likes.twitter_id%>
+<% if todo.like?(current_user) %>
+  <%= button_to 'いいねを取り消す', todo_like_path(todo), method: :delete %>
+<% else %>
+  <%= form_for :post, url: todo_likes_path(todo) do |f| %>
+    <p>
+      <%= f.submit 'いいね' %>
+    </p>
+  <% end %>
+<% end %>
