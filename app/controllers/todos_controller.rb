@@ -23,8 +23,14 @@ class TodosController < ApplicationController
       config.access_token_secret = current_user.access_token_secret
     end
 
-    client.update(@todo.body)
-    redirect_to root_path
+    begin
+      media_url = "https://8e13f918.ngrok.io/assets/pikachu.jpg"
+      media = open(media_url)
+      client.update!("https://8e13f918.ngrok.io")
+    rescue => e
+      error = e
+    end
+    render plain: error || "Twitter.update"
   end
 
   def destroy

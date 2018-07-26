@@ -43,6 +43,7 @@ gem 'dotenv-rails'
 gem 'twitter'
 gem 'haml'
 gem 'bcrypt-ruby'
+gem 'meta-tags'
 
 
 
