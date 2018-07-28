@@ -24,9 +24,7 @@ class TodosController < ApplicationController
     end
 
     begin
-      media_url = "https://8e13f918.ngrok.io/assets/pikachu.jpg"
-      media = open(media_url)
-      client.update!("https://8e13f918.ngrok.io")
+      client.update!("https://secure-ridge-55094.herokuapp.com")
     rescue => e
       error = e
     end
