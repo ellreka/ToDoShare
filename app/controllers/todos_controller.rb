@@ -24,7 +24,7 @@ class TodosController < ApplicationController
     end
 
     begin
-      client.update!("https://secure-ridge-55094.herokuapp.com")
+      client.update!("#{@todo.body}\n\n#Todo https://secure-ridge-55094.herokuapp.com")
     rescue => e
       error = e
     end
