@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  require 'rmagick'
+  include Magick
   def index
     @todos = Todo.all.order(created_at: 'desc')
   end
@@ -11,10 +13,10 @@ class TodosController < ApplicationController
   end
 
   def create
-    @todo = current_user.todos.create(
-      body: params[:post][:body],
-      twitter_id: current_user.twitter_id
-    )
+    # @todo = current_user.todos.create(
+    #   body: params[:post][:body],
+    #   twitter_id: current_user.twitter_id
+    # )
 
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['TWITTER_API_KEY']
@@ -24,11 +26,27 @@ class TodosController < ApplicationController
     end
 
     begin
-      client.update!("#{@todo.body}\n\n#Todo https://secure-ridge-55094.herokuapp.com")
+      # image = open("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg")
+      # image.display
+      # image.write("../assets/images/test.jpg")
+      # draw = Draw.new
+      # client.update!("#{@todo.body}\n\n#Todo https://secure-ridge-55094.herokuapp.com")
+      image = Image.read("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg").first
+      # image.to_blob
+      # Base64.encode64(img.to_blob)
+      # image = image_list.cur_image(1)
+      draw = Draw.new
+      draw.pointsize = 16
+      draw.gravity = CenterGravity
+      draw.annotate(image,100, 200, 300, 400,"test")
+      image.write("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu-test.jpg")
+      drawing = open("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu-test.jpg")
+      # draw_image = open("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg")
+      client.update_with_media("test",drawing)
     rescue => e
       error = e
     end
-    render plain: error || "Twitter.update"
+    render plain: error || image
   end
 
   def destroy
