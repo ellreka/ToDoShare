@@ -26,7 +26,7 @@ class TodosController < ApplicationController
     end
 
     begin
-      base_image = ImageList.new("https://secure-ridge-55094.herokuapp.com/assets/pikachu.jpg").first
+      base_image = ImageList.new("https://secure-ridge-55094.herokuapp.com/assets/pikachu-698cadd30db35a5b28d0bcbb461dfca322b202ed48932e57b917e33304a8254c.jpg").first
       draw = Draw.new
       draw.pointsize = 16
       draw.gravity = CenterGravity
