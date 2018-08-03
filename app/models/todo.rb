@@ -2,6 +2,7 @@ class Todo < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  has_many :images, dependent: :destroy
 
   def like(user)
     likes.create(user_id: user.id, twitter_id: user.twitter_id)

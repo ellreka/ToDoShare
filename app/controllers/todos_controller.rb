@@ -13,10 +13,10 @@ class TodosController < ApplicationController
   end
 
   def create
-    # @todo = current_user.todos.create(
-    #   body: params[:post][:body],
-    #   twitter_id: current_user.twitter_id
-    # )
+    @todo = current_user.todos.create(
+      body: params[:post][:body],
+      twitter_id: current_user.twitter_id
+    )
 
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['TWITTER_API_KEY']
@@ -26,27 +26,33 @@ class TodosController < ApplicationController
     end
 
     begin
-      # image = open("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg")
-      # image.display
-      # image.write("../assets/images/test.jpg")
-      # draw = Draw.new
-      # client.update!("#{@todo.body}\n\n#Todo https://secure-ridge-55094.herokuapp.com")
-      image = Image.read("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg").first
-      # image.to_blob
-      # Base64.encode64(img.to_blob)
-      # image = image_list.cur_image(1)
+      base_image = Image.read("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg").first
       draw = Draw.new
       draw.pointsize = 16
       draw.gravity = CenterGravity
-      draw.annotate(image,100, 200, 300, 400,"test")
-      image.write("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu-test.jpg")
-      drawing = open("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu-test.jpg")
-      # draw_image = open("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg")
-      client.update_with_media("test",drawing)
+      draw.annotate(base_image,100, 200, 300, 400,"test")
+      time = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
+      path = "/Users/akasa/src/project/ToDoShare/app/assets/images/#{current_user.name}-#{time}.jpg"
+      base_image.write(path)
+      draw_image = open(path)
+      assign_meta_tags(
+        title: "test",
+        site: "test",
+        description: "TwitterCard Test",
+        image: path.slice!("images/")
+      )
+      client.update!(path.slice!(""))
+      # client.update_with_media(@todo.body,draw_image)
+
+      image = current_user.images.create(
+        twitter_id: current_user.twitter_id,
+        todo_id: @todo.id,
+        path: path
+      )
     rescue => e
       error = e
     end
-    render plain: error || image
+    render plain: error || "Twitter.update!"
   end
 
   def destroy
@@ -56,7 +62,6 @@ class TodosController < ApplicationController
   end
 
   def mypage
-    # @todos = Todo.find(:twiiter_id).order(created_at: 'desc')
-    @todos = Todo.where(twitter_id: params[:twitter_id])
+    @todos = Todo.where(twitter_id: params[:twitter_id]).order(created_at: 'desc')
   end
 end

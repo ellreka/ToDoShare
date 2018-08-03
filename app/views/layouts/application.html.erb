@@ -2,16 +2,17 @@
 <html>
   <head>
     <title>ToDoShare</title>
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="<%= "@test47622386" %>" />
-    <meta property="og:url" content="https://secure-ridge-55094.herokuapp.com" />
-    <meta property="og:title" content="Test" />
-    <meta property="og:description" content="TwitterCard Test" />
-    <meta property="og:image" content="https://secure-ridge-55094.herokuapp.com/assets/pikachu.jpg" />
+    <%# <meta name="twitter:card" content="summary_large_image" /> %>
+    <%#<meta name="twitter:site" content="<%= "@test47622386" %>
+    <%# <meta property="og:url" content="https://secure-ridge-55094.herokuapp.com" /> %>
+    <%# <meta property="og:title" content="Test" /> %>
+    <%# <meta property="og:description" content="TwitterCard Test" /> %>
+    <%# <meta property="og:image" content="https://secure-ridge-55094.herokuapp.com/assets/pikachu.jpg" /> %>
+    <%= display_meta_tags %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 

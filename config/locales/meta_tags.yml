@@ -1,0 +1,6 @@
+en:
+  meta_tags:
+    defaults:
+      site: 'ToDoShare'
+      title: ''
+      description: ''

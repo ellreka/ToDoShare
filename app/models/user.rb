@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :todos, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :images, dependent: :destroy
   has_many :liked_todos, through: :likes, source: :todo
   def self.find_or_create_from_auth(auth)
     provider = auth[:provider]

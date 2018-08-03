@@ -45,6 +45,7 @@ gem 'haml'
 gem 'bcrypt-ruby'
 gem 'meta-tags'
 gem 'rmagick'
+gem 'meta-tags'
 
 
 
