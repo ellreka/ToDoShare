@@ -26,22 +26,23 @@ class TodosController < ApplicationController
     end
 
     begin
-      base_image = Image.read("/Users/akasa/src/project/ToDoShare/app/assets/images/pikachu.jpg").first
+      base_image = Image.read("https://secure-ridge-55094.herokuapp.com/assets/pikachu.jpg").first
       draw = Draw.new
       draw.pointsize = 16
       draw.gravity = CenterGravity
       draw.annotate(base_image,100, 200, 300, 400,"test")
       time = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-      path = "/Users/akasa/src/project/ToDoShare/app/assets/images/#{current_user.name}-#{time}.jpg"
+      path = "https://secure-ridge-55094.herokuapp.com/assets/#{current_user.name}-#{time}.jpg"
       base_image.write(path)
       draw_image = open(path)
       assign_meta_tags(
         title: "test",
         site: "test",
         description: "TwitterCard Test",
-        image: path.slice!("images/")
+        # image: path.slice!("images/")
+        image: path
       )
-      client.update!(path.slice!(""))
+      client.update!("https://secure-ridge-55094.herokuapp.com")
       # client.update_with_media(@todo.body,draw_image)
 
       image = current_user.images.create(
