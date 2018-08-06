@@ -44,7 +44,7 @@ gem 'twitter'
 gem 'haml'
 gem 'bcrypt-ruby'
 gem 'meta-tags'
-gem 'rmagick'
+gem "mini_magick"
 gem 'meta-tags'
 
 

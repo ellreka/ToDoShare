@@ -1,6 +1,5 @@
 class TodosController < ApplicationController
-  require 'RMagick'
-  include Magick
+  require 'mini_magick'
   def index
     @todos = Todo.all.order(created_at: 'desc')
   end
@@ -13,10 +12,10 @@ class TodosController < ApplicationController
   end
 
   def create
-    # @todo = current_user.todos.create(
-    #   body: params[:post][:body],
-    #   twitter_id: current_user.twitter_id
-    # )
+    @todo = current_user.todos.create(
+      body: params[:post][:body],
+      twitter_id: current_user.twitter_id
+    )
 
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = ENV['TWITTER_API_KEY']
@@ -26,35 +25,31 @@ class TodosController < ApplicationController
     end
 
     begin
-      base_image = ImageList.new("https://secure-ridge-55094.herokuapp.com/assets/pikachu.jpg").first
-      draw = Draw.new
-      draw.pointsize = 16
-      draw.gravity = CenterGravity
-      draw.annotate(base_image,100, 200, 300, 400,"test")
+      base_image = MiniMagick::Image.open("app/assets/images/pikachu.jpg")
       time = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-      # path = "https://secure-ridge-55094.herokuapp.com/assets/#{current_user.twitter_id}-#{time}.jpg"
-      path = "https://secure-ridge-55094.herokuapp.com/assets/test.jpg"
-      base_image.write("app/assets/images/test.jpg")
-      # render plain: path
-      draw_image = open(path)
+      path = "app/assets/images/#{current_user.twitter_id}-#{time}.jpg"
+      base_image.gravity 'center'
+      base_image.draw "text 200,200 'test'"
+      base_image.write(path)
       assign_meta_tags(
         title: "test",
         site: "test",
         description: "TwitterCard Test",
-        # image: path.slice!("images/")
-        image: path
+        image: path,
+        url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
       )
-      image = current_user.images.create(
+      @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: @todo.id,
         path: path
       )
-      client.update!("https://secure-ridge-55094.herokuapp.com")
-      # client.update_with_media(@todo.body,draw_image)
+      # client.update!("テストだよーん")
+      client.update_with_media(@todo.body,open(@image.path))
     rescue => e
       error = e
     end
-    render plain: error || "Twitter.update!"
+     render plain: error || "Twitter.update!"
+    #  render plain: base_image
   end
 
   def destroy

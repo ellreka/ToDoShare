@@ -13,9 +13,10 @@ module MetaTaggable
     defaults = t('meta_tags.defaults')
     options.reverse_merge!(defaults)
     site = options[:site]
-    title = options[:title]
-    description = options[:description]
+    title = options[:title] || "ToDoShare"
+    description = options[:description] || "ToDoをみんなでシェアしよう！"
     image = options[:image] || image_url('pikachu.jpg')
+    url = options[:url] || "https://secure-ridge-55094.herokuapp.com"
 
     configs = {
       reverse: true,
@@ -23,7 +24,7 @@ module MetaTaggable
       title: title,
       description: description,
       og: {
-        url: request.url,
+        url: url,
         title: title || site,
         description: description,
         image: image
