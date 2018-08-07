@@ -18,7 +18,6 @@ module MetaTaggable
 
   def assign_meta_tags(options = {})
     defaults = t('meta_tags.defaults')
-    options.reverse_merge!(defaults)
     site = options[:site] || ""
     title = options[:title] || "ToDoShare"
     description = options[:description] || "ToDoをみんなでシェアしよう！"
@@ -42,6 +41,7 @@ module MetaTaggable
       }
     }
 
+    options.reverse_merge!(defaults)
     set_meta_tags(options)
   end
 end
