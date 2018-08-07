@@ -43,8 +43,8 @@ class TodosController < ApplicationController
         todo_id: @todo.id,
         path: path
       )
-      # client.update!("テストだよーん")
-      client.update_with_media(@todo.body,open(@image.path))
+      client.update!("https://secure-ridge-55094.herokuapp.com")
+      # client.update_with_media(@todo.body,open(@image.path))
     rescue => e
       error = e
     end
