@@ -3,19 +3,11 @@ module MetaTaggable
 
   include ActionView::Helpers::AssetUrlHelper
 
-  included do
-    before_action :assign_meta_tags
-  end
+  # included do
+  #   before_action :assign_meta_tags
+  # end
 
   private
-
-  def show_meta_tags
-    if display_meta_tags.blank?
-      assign_meta_tags
-    end
-    display_meta_tags
-  end
-
   def assign_meta_tags(options = {})
     defaults = t('meta_tags.defaults')
     site = options[:site] || ""
