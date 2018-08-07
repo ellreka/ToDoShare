@@ -34,7 +34,6 @@ class TodosController < ApplicationController
       assign_meta_tags(
         title: "Super Test",
         site: "test",
-        # description: "TwitterCard Test",
         image: path,
         url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
       )
