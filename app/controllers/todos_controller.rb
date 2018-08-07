@@ -37,6 +37,12 @@ class TodosController < ApplicationController
         image: path,
         url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
       )
+      # assign_meta_tags(
+      #   # title: "Super Test",
+      #   # site: "@#{current_user.twitter_id}",
+      #   # image: path,
+      #   url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
+      # )
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: @todo.id,

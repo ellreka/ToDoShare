@@ -30,7 +30,7 @@ module MetaTaggable
       }
     }
 
-    options.reverse_merge!(defaults)
+    options.reverse_merge!(configs)
     set_meta_tags(options)
   end
 end
