@@ -3,9 +3,9 @@ module MetaTaggable
 
   include ActionView::Helpers::AssetUrlHelper
 
-  # included do
-  #   before_action :assign_meta_tags
-  # end
+  included do
+    before_action :assign_meta_tags
+  end
 
   private
   def assign_meta_tags(options = {})
@@ -18,18 +18,15 @@ module MetaTaggable
 
     configs = {
       reverse: true,
-      site: site,
-      title: title,
-      description: description,
       og: {
         url: url,
         title: title || site,
         description: description,
-        image: image
+        image: image,
       },
       twitter: {
         card: "summary_large_image",
-        site: "@#{current_user.twitter_id}"
+        site: site,
       }
     }
 

@@ -31,12 +31,12 @@ class TodosController < ApplicationController
       base_image.gravity 'center'
       base_image.draw "text 200,200 'test'"
       base_image.write(path)
-      # assign_meta_tags(
-      #   title: "Super Test",
-      #   site: "test",
-      #   image: path,
-      #   url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
-      # )
+      assign_meta_tags(
+        title: "Super Test",
+        site: "test",
+        image: path,
+        url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
+      )
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: @todo.id,
