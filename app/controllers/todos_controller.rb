@@ -32,9 +32,9 @@ class TodosController < ApplicationController
       base_image.draw "text 200,200 'test'"
       base_image.write(path)
       assign_meta_tags(
-        title: "test",
+        title: "Super Test",
         site: "test",
-        description: "TwitterCard Test",
+        # description: "TwitterCard Test",
         image: path,
         url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
       )
