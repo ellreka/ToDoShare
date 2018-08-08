@@ -4,6 +4,7 @@ class CreateImages < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.string :twitter_id
       t.integer :todo_id
+      t.string :name
       t.string :path
 
       t.timestamps

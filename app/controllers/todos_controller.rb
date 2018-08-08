@@ -6,6 +6,13 @@ class TodosController < ApplicationController
 
   def show
     @todo = Todo.find(params[:id])
+    @image = Image.find_by(todo_id: @todo.id)
+    assign_meta_tags(
+      title: "Super Test",
+      site: @todo.twitter_id,
+      image: "https://secure-ridge-55094.herokuapp.com/assets/#{@image.name}",
+      url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
+    )
   end
 
   def new
@@ -34,6 +41,7 @@ class TodosController < ApplicationController
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: @todo.id,
+        name: image_name,
         path: "app/assets/images/#{image_name}"
       )
       assign_meta_tags(
