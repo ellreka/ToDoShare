@@ -47,7 +47,7 @@ class TodosController < ApplicationController
     rescue => e
       error = e
     end
-     render plain: error || "Twitter.update!"
+     render plain: error || "Twitter.update!#{path}"
     #  render plain: base_image
   end
 
