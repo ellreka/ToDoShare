@@ -27,27 +27,26 @@ class TodosController < ApplicationController
     begin
       base_image = MiniMagick::Image.open("app/assets/images/pikachu.jpg")
       time = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-      path = "app/assets/images/#{current_user.twitter_id}-#{time}.jpg"
+      image_name = "#{current_user.twitter_id}-#{time}.jpg"
       base_image.gravity 'center'
       base_image.draw "text 200,200 'test'"
-      base_image.write(path)
-      assign_meta_tags(
-        title: "Super Test",
-        site: "@#{current_user.twitter_id}",
-        image: path.slice!("/images"),
-        url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
-      )
+      base_image.write("app/assets/images/#{image_name}")
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: @todo.id,
-        path: path
+        path: "app/assets/images/#{image_name}"
+      )
+      assign_meta_tags(
+        title: "Super Test",
+        site: "@#{current_user.twitter_id}",
+        image: "https://secure-ridge-55094.herokuapp.com/assets/#{image_name}",
+        url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
       )
       client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}")
-      # client.update_with_media(@todo.body,open(@image.path))
     rescue => e
       error = e
     end
-     render plain: error || "Twitter.update!#{path}"
+     render plain: error || "Twitter.update! https://secure-ridge-55094.herokuapp.com/assets/#{image_name}"
     #  render plain: base_image
   end
 
