@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2018_07_30_064913) do
     t.integer "user_id"
     t.string "twitter_id"
     t.integer "todo_id"
+    t.string "name"
     t.string "path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,13 +29,14 @@ ActiveRecord::Schema.define(version: 2018_07_30_064913) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["todo_id"], name: "index_likes_on_todo_id"
+    t.index ["user_id", "todo_id"], name: "index_likes_on_user_id_and_todo_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "body"
     t.integer "user_id"
-    t.bigint "twitter_id"
+    t.string "twitter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
