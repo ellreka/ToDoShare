@@ -25,6 +25,10 @@ module MetaTaggable
         image: image,
       },
       twitter: {
+        url: url,
+        title: title || site,
+        description: description,
+        image: image,
         card: "summary_large_image",
         site: site,
       }
