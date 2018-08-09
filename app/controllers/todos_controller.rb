@@ -19,7 +19,7 @@ class TodosController < ApplicationController
   end
 
   def create
-    @todo = current_user.todos.create(
+    todo = current_user.todos.create(
       body: params[:post][:body],
       twitter_id: current_user.twitter_id
     )
@@ -48,7 +48,7 @@ class TodosController < ApplicationController
     rescue => e
       error = e
     end
-     render plain: error || redirect_to todo_path(@todo)
+     render plain: error || redirect_to todo_path(todo)
     #  render plain: base_image
   end
 
