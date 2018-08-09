@@ -31,13 +31,14 @@ class TodosController < ApplicationController
     end
 
     begin
+      image_name = "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: todo.id,
-        name: "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg",
+        name: image_name,
         path: "app/assets/images/#{image_name}"
       )
-      @image.generate_image(@image.name)
+      @image.generate_image(image_name)
       client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}")
     rescue => e
       error = e
