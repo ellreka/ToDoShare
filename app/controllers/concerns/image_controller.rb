@@ -1,4 +1,5 @@
 class ImageController < ApplicationController
+  extend ActiveSupport::Concern
   require 'mini_magick'
 
   private
