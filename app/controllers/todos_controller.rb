@@ -48,7 +48,12 @@ class TodosController < ApplicationController
     rescue => e
       error = e
     end
-     render plain: error || redirect_to todo_path(todo)
+    
+    if(e)
+      render plain: error
+    else
+      redirect_to todo_path(todo)
+    end
     #  render plain: base_image
   end
 
