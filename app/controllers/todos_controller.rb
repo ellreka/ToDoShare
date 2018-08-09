@@ -44,17 +44,11 @@ class TodosController < ApplicationController
         name: image_name,
         path: "app/assets/images/#{image_name}"
       )
-      # assign_meta_tags(
-      #   title: "Super Test",
-      #   site: "@#{current_user.twitter_id}",
-      #   image: "https://secure-ridge-55094.herokuapp.com/assets/#{image_name}",
-      #   url: "https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}"
-      # )
       client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}")
     rescue => e
       error = e
     end
-     render plain: error || "Twitter.update! https://secure-ridge-55094.herokuapp.com/assets/#{image_name}"
+     render plain: error || redirect_to todo_path(@todo)
     #  render plain: base_image
   end
 
