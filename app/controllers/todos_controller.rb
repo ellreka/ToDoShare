@@ -34,7 +34,8 @@ class TodosController < ApplicationController
     begin
       base_image = MiniMagick::Image.open("app/assets/images/pikachu.jpg")
       time = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-      image_name = "#{current_user.twitter_id}-#{time}.jpg"
+      # image_name = "#{current_user.twitter_id}-#{time}.jpg"
+      image_name = "testdayo.jpg"
       base_image.gravity 'center'
       base_image.draw "text 200,200 'test'"
       base_image.write("app/assets/images/#{image_name}")
