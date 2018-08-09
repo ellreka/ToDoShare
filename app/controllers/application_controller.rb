@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include MetaTaggable
-  include ImageController
+  # include ImageController
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?
 

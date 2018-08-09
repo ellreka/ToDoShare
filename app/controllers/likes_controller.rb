@@ -12,8 +12,4 @@ class LikesController < ApplicationController
     redirect_to root_path
   end
 
-  private
-    def twitter_id
-      current_user.twitter_id
-    end
 end
