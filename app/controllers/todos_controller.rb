@@ -55,11 +55,13 @@ class TodosController < ApplicationController
       error = e
     end
 
-    if(e)
-      render plain: error
-    else
-      redirect_to todo_path(todo)
-    end
+    render plain: error || "Sucess!!"
+
+    # if(e)
+    #   render plain: error
+    # else
+    #   redirect_to todo_path(todo)
+    # end
     #  render plain: base_image
   end
 
