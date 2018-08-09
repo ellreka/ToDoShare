@@ -40,15 +40,15 @@ class TodosController < ApplicationController
       base_image.write("app/assets/images/#{image_name}")
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
-        todo_id: @todo.id,
+        todo_id: todo.id,
         name: image_name,
         path: "app/assets/images/#{image_name}"
       )
-      client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{@todo.id}")
+      client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}")
     rescue => e
       error = e
     end
-    
+
     if(e)
       render plain: error
     else
