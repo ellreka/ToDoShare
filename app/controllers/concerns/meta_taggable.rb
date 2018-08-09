@@ -8,6 +8,7 @@ module MetaTaggable
   end
 
   private
+  
   def assign_meta_tags(options = {})
     defaults = t('meta_tags.defaults')
     site = options[:site] || ""

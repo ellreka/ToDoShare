@@ -1,5 +1,4 @@
 class TodosController < ApplicationController
-  require 'mini_magick'
   def index
     @todos = Todo.all.order(created_at: 'desc')
   end
@@ -32,13 +31,8 @@ class TodosController < ApplicationController
     end
 
     begin
-      base_image = MiniMagick::Image.open("app/assets/images/pikachu.jpg")
-      time = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-      image_name = "#{current_user.twitter_id}-#{time}.jpg"
-      image_name = "testdayo.jpg"
-      base_image.gravity 'center'
-      base_image.draw "text 200,200 'test'"
-      base_image.write("app/assets/images/#{image_name}")
+      image_name = "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
+      generate_image(image_name)
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: todo.id,
