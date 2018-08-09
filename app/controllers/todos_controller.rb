@@ -38,14 +38,14 @@ class TodosController < ApplicationController
       image_name = "testdayo.jpg"
       base_image.gravity 'center'
       base_image.draw "text 200,200 'test'"
-      base_image.write("app/assets/images/#{image_name}")
-      @image = current_user.images.create(
-        twitter_id: current_user.twitter_id,
-        todo_id: todo.id,
-        name: image_name,
-        path: "app/assets/images/#{image_name}"
-      )
-      client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}")
+      base_image.write("arigatou.jpg")
+      # @image = current_user.images.create(
+      #   twitter_id: current_user.twitter_id,
+      #   todo_id: todo.id,
+      #   name: image_name,
+      #   path: "app/assets/images/#{image_name}"
+      # )
+      # client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}")
     rescue => e
       error = e
     end
