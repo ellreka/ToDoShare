@@ -35,8 +35,7 @@ class TodosController < ApplicationController
       @image = current_user.images.create(
         twitter_id: current_user.twitter_id,
         todo_id: todo.id,
-        name: image_name,
-        path: "app/assets/images/#{image_name}"
+        name: image_name
       )
       @image.generate_image(image_name)
       client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}")

@@ -3,26 +3,10 @@
 Todos
 </h2>
 <ul>
-<%= image_tag("pikachu.jpg")%>
 <% @todos.each do |todo| %>
  <li>
-　<%= link_to todo.body,
-  todo_path(todo) %>
-  <%= "いいねの数: #{todo.likes.count}" %>
-  <% if todo.like?(current_user) %>
-    <%= form_for(todo.likes.find_by(twitter_id: current_user.twitter_id), url: todo_like_path(todo, id: todo.id), method: :delete) do |f| %>
-      <p>
-        <%= f.submit 'いいねを取り消す' %>
-      </p>
-    <% end %>
-  <% else %>
-    <%= form_for(todo.likes.build, url: todo_likes_path(todo, id: todo.id)) do |f| %>
-      <p>
-        <%= f.submit 'いいね' %>
-      </p>
-    <% end %>
-  <% end %>
-  <%# <% render "likes/likes_show", todo: todo %> %>
+　<%= link_to todo.body,todo_path(todo) %>
+  <%= render 'likes/show', todo: todo %>
   <%= link_to 'delete', 
   todo_path(todo), method: :delete, 
   data: { confirm: 'Sure?' } %>
