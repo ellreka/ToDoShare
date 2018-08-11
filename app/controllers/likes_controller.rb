@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-
   def create
     @todo = Todo.find(params[:todo_id])
     @todo.like(current_user)

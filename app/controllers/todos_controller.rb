@@ -30,24 +30,15 @@ class TodosController < ApplicationController
       config.access_token_secret = current_user.access_token_secret
     end
 
-    begin
-      image_name = "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
-      @image = current_user.images.create(
-        twitter_id: current_user.twitter_id,
-        todo_id: todo.id,
-        name: image_name
-      )
-      @image.generate_image(image_name)
-      client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}")
-    rescue => e
-      error = e
-    end
-
-    if(error)
-      render plain: error
-    else
-      redirect_to todo_path(todo)
-    end
+    image_name = "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
+    @image = current_user.images.create(
+      twitter_id: current_user.twitter_id,
+      todo_id: todo.id,
+      name: image_name
+    )
+    @image.generate(image_name)
+    client.update!("https://secure-ridge-55094.herokuapp.com/todos/#{todo.id}") # todo_url
+    redirect_to todo_path(todo)
   end
 
   def destroy
@@ -57,6 +48,20 @@ class TodosController < ApplicationController
   end
 
   def mypage
-    @todos = Todo.where(twitter_id: params[:twitter_id]).order(created_at: 'desc')
+    @todos = Todo.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
+  end
+
+  def likes
+    likes = Like.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
+
+    todo_ids = []
+    likes.each do |like|
+      todo_ids.push(like.todo_id)
+    end
+
+    @todos = []
+    todo_ids.each do |id|
+      @todos.push(Todo.find_by(id: id))
+    end
   end
 end
