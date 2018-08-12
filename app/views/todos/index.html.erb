@@ -6,6 +6,7 @@ Todos
 <% @todos.each do |todo| %>
  <li>
 　<%= link_to todo.body,todo_path(todo) %>
+  <%= image_tag(todo.images[0].name)%>
   <%= render 'likes/show', todo: todo %>
   <%= link_to 'delete', 
   todo_path(todo), method: :delete, 
@@ -13,4 +14,5 @@ Todos
  </li>
 <% end %>
 </ul>
+
 <a href="/auth/twitter"><button>ログイン</button></a>
