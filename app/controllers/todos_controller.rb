@@ -1,6 +1,9 @@
 class TodosController < ApplicationController
   def index
-    @todos = Todo.all.order(created_at: 'desc')
+    @todos = Todo.all.order(created_at: 'desc').limit(5)
+    # images_id = []
+    # @todos.each do |todo|
+    #   images_id.push(todo.)
   end
 
   def show
@@ -30,19 +33,19 @@ class TodosController < ApplicationController
       config.access_token_secret = current_user.access_token_secret
     end
 
-    image_name = "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
     image = current_user.images.create(
       twitter_id: current_user.twitter_id,
       todo_id: todo.id,
-      name: image_name
+      name: "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
     )
-    image.generate(image_name,todo.body)
-    client.update(todo_url(todo))
+
+    image.generate(image.name,todo.body)
+    # client.update(todo_url(todo))
     redirect_to todo_path(todo)
   end
 
   def destroy
-    @todo = Todo.find_by(id: params[:id])
+    @todo = Todo.find(params[:id])
     @todo.destroy
     redirect_to todos_path
   end
@@ -54,14 +57,14 @@ class TodosController < ApplicationController
   def likes
     likes = Like.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
 
-    todo_ids = []
+    todos_id = []
     likes.each do |like|
-      todo_ids.push(like.todo_id)
+      todos_id.push(like.todo_id)
     end
 
     @todos = []
-    todo_ids.each do |id|
-      @todos.push(Todo.find_by(id: id))
+    todos_id.each do |id|
+      @todos.push(Todo.find(id))
     end
   end
 end

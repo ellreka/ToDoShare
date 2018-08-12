@@ -5,10 +5,13 @@ class Image < ApplicationRecord
   validates :todo_id, presence: true
 
   def generate(name,body)
-    base_image = MiniMagick::Image.open("app/assets/images/base_card.png")
-    base_image.gravity 'center'
-    base_image.draw "text 200,200 '#{body}'"
-    base_image.write("app/assets/images/#{name}")
+    image = MiniMagick::Image.open("app/assets/images/base_card.png")
+    image.combine_options do |i|
+      i.resize "550x315"
+      i.font "app/assets/fonts/ヒラギノ丸ゴ ProN W4.ttc"
+      i.gravity 'center'
+      i.draw "text 100,100 '#{body}'"
+      i.write("app/assets/images/#{name}")
+    end
   end
-  
 end
