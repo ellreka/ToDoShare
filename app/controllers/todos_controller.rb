@@ -1,9 +1,8 @@
 class TodosController < ApplicationController
+  before_action :set_user_variables
+
   def index
     @todos = Todo.all.order(created_at: 'desc').limit(5)
-    # images_id = []
-    # @todos.each do |todo|
-    #   images_id.push(todo.)
   end
 
   def show
@@ -17,30 +16,19 @@ class TodosController < ApplicationController
     )
   end
 
-  def new
-  end
-
   def create
     todo = current_user.todos.create(
       body: params[:post][:body],
-      twitter_id: current_user.twitter_id
+      twitter_id: @twitter_id,
+      likes_count: 0
     )
-
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key = ENV['TWITTER_API_KEY']
-      config.consumer_secret = ENV['TWITTER_SECRET_KEY']
-      config.access_token = current_user.access_token
-      config.access_token_secret = current_user.access_token_secret
-    end
-
-    image = current_user.images.create(
-      twitter_id: current_user.twitter_id,
+    image = @current_user.images.create(
+      twitter_id: @twitter_id,
       todo_id: todo.id,
-      name: "#{current_user.twitter_id}-#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"
+      name: "#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png"
     )
-
-    image.generate(image.name,todo.body)
-    # client.update(todo_url(todo))
+    image.make(@twitter_id,image.name,todo.body,@icon_url)
+    # todo.tweet()
     redirect_to todo_path(todo)
   end
 
@@ -51,11 +39,11 @@ class TodosController < ApplicationController
   end
 
   def mypage
-    @todos = Todo.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
+    @todos = Todo.where(twitter_id: @twitter_id).order(created_at: 'desc')
   end
 
   def likes
-    likes = Like.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
+    likes = Like.where(twitter_id: @twitter_id).order(created_at: 'desc')
 
     todos_id = []
     likes.each do |like|
@@ -66,5 +54,11 @@ class TodosController < ApplicationController
     todos_id.each do |id|
       @todos.push(Todo.find(id))
     end
+  end
+
+  private
+  def set_user_variables
+    @twitter_id = current_user.twitter_id
+    @icon_url = current_user.icon_url
   end
 end

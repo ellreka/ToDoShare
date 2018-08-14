@@ -6,12 +6,16 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    return unless session[:twitter_id]
-    @current_user ||= User.find_by(twitter_id: session[:twitter_id])
+    return unless session[:user_id]
+    @current_user ||= User.find(session[:user_id])
+  end
+
+  def signed_in?
+    
   end
 
   def logged_in?
-    !!session[:twitter_id]
+    !!session[:user_id]
   end
 
   def authenticate

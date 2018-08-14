@@ -1,9 +1,8 @@
 <% todos.each do |todo| %>
  <li>
 　<%= link_to todo.body,todo_path(todo) %>
-  <%= image_tag(todo.images[0].name)%>
+  <%= image_tag("todos/#{todo.twitter_id}/#{todo.images[0].name}")%>
   <%= render 'likes/like', todo: todo %>
-
   <%= link_to 'delete', 
   todo_path(todo), method: :delete, 
   data: { confirm: 'Sure?' } %>

@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2018_07_30_064913) do
     t.string "body"
     t.integer "user_id"
     t.string "twitter_id"
+    t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_07_30_064913) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "twitter_id"
-    t.string "image_url"
+    t.string "icon_url"
     t.string "provider"
     t.string "access_token"
     t.string "access_token_secret"
