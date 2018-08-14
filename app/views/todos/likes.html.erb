@@ -3,13 +3,5 @@
   Todos
 </h2>
 <ul>
-<% @todos.each do |todo| %>
-<li>
-<%= link_to todo.body, todo_path(todo) %>
-<%= link_to 'delete', 
-    todo_path(todo), 
-    method: :delete, 
-    data: { confirm: 'Sure?' } %>
-</li>
-<% end %>
+  <%= render 'todos', todos: @todos %>
 </ul>
