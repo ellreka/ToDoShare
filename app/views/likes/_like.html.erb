@@ -1,0 +1,28 @@
+<div id="like">
+<% if logged_in? %>
+  <% if todo.like?(current_user.twitter_id) %>
+    <%= button_to todo_like_path(todo, id: todo.id), method: :delete, id: "like-button", remote: true do %>
+      <%= image_tag("icon_red_heart.svg") %>
+      <span>
+        <%= todo.likes_count %>
+      </span>
+    <% end %>
+  <% else %>
+    <%= button_to todo_likes_path(todo), id: "like-button", remote: true do %>
+      <%= image_tag("icon_heart.svg") %>
+      <span>
+        <%= todo.likes_count %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= image_tag("icon_heart.svg") %>
+  <% "これ？" %>
+    <span>
+        <%= todo.likes_count %>
+    </span>
+<% end %>
+</div>
+
+
+
