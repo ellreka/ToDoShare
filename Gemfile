@@ -46,6 +46,9 @@ gem 'bcrypt-ruby'
 gem 'meta-tags'
 gem "mini_magick"
 gem 'meta-tags'
+gem 'bootstrap', '~> 4.1.3'
+gem 'jquery-ui-rails'
+gem 'jquery-rails'
 
 
 
