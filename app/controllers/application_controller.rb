@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    
   end
 
   def logged_in?
@@ -21,5 +20,11 @@ class ApplicationController < ActionController::Base
   def authenticate
     return if logged_in?
     redirect_to root_path, alert: "ログインしてください"
+  end
+
+  def user_check
+    unless current_user
+      redirect_to root_path
+    end
   end
 end

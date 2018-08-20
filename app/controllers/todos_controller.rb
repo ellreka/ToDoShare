@@ -1,8 +1,10 @@
 class TodosController < ApplicationController
-  before_action :set_user_variables
-
+  before_action :user_check
   def index
     @todos = Todo.all.order(created_at: 'desc').limit(5)
+  end
+
+  def new
   end
 
   def show
@@ -19,15 +21,15 @@ class TodosController < ApplicationController
   def create
     todo = current_user.todos.create(
       body: params[:post][:body],
-      twitter_id: @twitter_id,
+      twitter_id: current_user.twitter_id,
       likes_count: 0
     )
-    image = @current_user.images.create(
-      twitter_id: @twitter_id,
+    image = current_user.images.create(
+      twitter_id: current_user.twitter_id,
       todo_id: todo.id,
       name: "#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png"
     )
-    image.make(@twitter_id,image.name,todo.body,@icon_url)
+    image.make(current_user.twitter_id,image.name,todo.body,current_user.icon_url)
     # todo.tweet()
     redirect_to todo_path(todo)
   end
@@ -39,11 +41,11 @@ class TodosController < ApplicationController
   end
 
   def mypage
-    @todos = Todo.where(twitter_id: @twitter_id).order(created_at: 'desc')
+    @todos = Todo.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
   end
 
   def likes
-    likes = Like.where(twitter_id: @twitter_id).order(created_at: 'desc')
+    likes = Like.where(twitter_id: current_user.twitter_id).order(created_at: 'desc')
 
     todos_id = []
     likes.each do |like|
@@ -54,11 +56,5 @@ class TodosController < ApplicationController
     todos_id.each do |id|
       @todos.push(Todo.find(id))
     end
-  end
-
-  private
-  def set_user_variables
-    @twitter_id = current_user.twitter_id
-    @icon_url = current_user.icon_url
   end
 end

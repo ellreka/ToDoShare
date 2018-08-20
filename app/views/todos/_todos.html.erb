@@ -1,10 +1,15 @@
-<% todos.each do |todo| %>
- <li>
-　<%= link_to todo.body,todo_path(todo) %>
-  <%= image_tag("todos/#{todo.twitter_id}/#{todo.images[0].name}")%>
-  <%= render 'likes/like', todo: todo %>
-  <%= link_to 'delete', 
-  todo_path(todo), method: :delete, 
-  data: { confirm: 'Sure?' } %>
- </li>
-<% end %>
+<div data-type="todos">
+  <div class="container">
+    <% todos.each do |todo| %>
+      <div class="todo-box">
+        <div class="todo-wrapper">
+          <a class="image" href="<%= todo_path(todo) %>">
+            <%= image_tag("todos/#{todo.twitter_id}/#{todo.images[0].name}") %>
+          </a>
+          <%#<%= render 'likes/like', todo: todo %>
+          <%= button_to "delete", todo_path(todo), method: :delete, data: { confirm: 'Sure?' } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

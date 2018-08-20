@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :todos do
+  resources :todos, only: [:index, :create, :destroy, :new, :show] do
     resources :likes, only: [:create, :destroy]
   end
-  get '/:twitter_id', to: 'todos#mypage'
-  get '/:twitter_id/likes', to: 'todos#likes'
-  get '/auth/:provider/callback', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
-  root 'todos#index'
+  get '/top' => 'static_pages#top'
+  get '/:twitter_id' =>  'todos#mypage'
+  get '/:twitter_id/likes' => 'todos#likes'
+  get '/auth/:provider/callback' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+  root 'static_pages#top'
 end

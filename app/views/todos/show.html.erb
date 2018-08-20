@@ -1,5 +1,6 @@
 <p>
 <%= @todo.body %>
 <%= image_tag("todos/#{@todo.twitter_id}/#{@image.name}") %>
-<%# <%= image_tag(todo.images[0].name) %> %>
+<%= button_to "delete", todo_path(@todo), method: :delete, data: { confirm: 'Sure?' } %>
+<%# <%= image_tag(todo.images[0].name) %>
 </p>

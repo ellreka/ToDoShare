@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :set_variables
+  before_action :set_variables,:user_check
 
   def create
     @like = Like.create(user_id: @user_id, todo_id: @todo_id, twitter_id: @twitter_id)
