@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ToDoShare</title>
+    <%= display_meta_tags %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    
   </head>
-
   <body>
+    <%= render 'layouts/header' %>
+    <%= link_to 'home', root_path %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
+    <% if (current_user) %>
+      <%= render 'layouts/menu' %>
+    <% end %>
   </body>
 </html>

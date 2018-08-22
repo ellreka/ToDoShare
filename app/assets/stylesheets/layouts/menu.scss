@@ -1,0 +1,27 @@
+div[data-type="menu"] {
+  background: white;
+  border-top: 1px solid whitesmoke;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  // z-index: 3;
+  .wrapper {
+    padding-top: 15px;
+    .links {
+      display: flex;
+      text-align: center;
+      .timeline {
+        color: green;
+      }
+      .mypage {
+        color: green;
+      }
+      .likes {
+        color: green;
+      }
+    }
+  }
+}
